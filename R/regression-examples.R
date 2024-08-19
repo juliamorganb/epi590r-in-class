@@ -101,6 +101,7 @@ tbl_merge(list(tbl_no_int, tbl_int),
 
 ########### need to call the model, not nlsy and need to create models to do this with
 			####use her code to do this
+# can't go straight to running the table tbl_uvregression
 
 tbl_uvregression(
 	nlsy,
