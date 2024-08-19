@@ -3,7 +3,7 @@
 This repository belongs to Louisa H. Smith
 
 <<<<<<< HEAD
-Change
+Change test
 =======
 This is for a class
 
