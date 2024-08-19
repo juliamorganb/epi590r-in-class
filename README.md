@@ -1,10 +1,5 @@
 # EPI590R repo
 
-This repository belongs to Louisa H. Smith
+This repository belongs to Julia Baumohl
 
-<<<<<<< HEAD
-Change test
-=======
-This is for a class
 
->>>>>>> 5264dcd (change)
