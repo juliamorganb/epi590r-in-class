@@ -99,6 +99,9 @@ tbl_merge(list(tbl_no_int, tbl_int),
 
 #### my code ####
 
+########### need to call the model, not nlsy and need to create models to do this with
+			####use her code to do this
+
 tbl_uvregression(
 	nlsy,
 	x = sex_cat,
@@ -115,3 +118,28 @@ tbl_uvregression(
 
 logistic_model_practice <- glm(glasses ~ eyesight_cat + sex_cat,
 											data = nlsy, family = binomial(link= "log"))
+
+tbl_uvregression(
+	nlsy,
+	y = glasses,
+	include = c(eyesight_cat, sex_cat),
+	method = glm,
+	method.args = list(family = binomial(link= "log")),
+	exponentiate = TRUE)
+
+logistic_model_practice2 <- glm(glasses ~ eyesight_cat + sex_cat,
+															 data = nlsy, family = poisson())
+
+tbl_uvregression(
+	nlsy,
+	y = glasses,
+	include = c(eyesight_cat, sex_cat),
+	method = glm,
+	method.args = list(family = poisson()),
+	exponentiate = TRUE)
+
+
+tidy_fun = partial(tidy_robust, vcov = "HC1") #####isnt doing anythingggg
+
+tbl_merge(list(logistic_model_practice, logistic_model_practice2), ###also not working
+					tab_spanner = c("**Model 1**", "**Model 2**"))
