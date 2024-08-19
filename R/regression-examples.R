@@ -96,3 +96,22 @@ tbl_int <- tbl_regression(
 
 tbl_merge(list(tbl_no_int, tbl_int),
 					tab_spanner = c("**Model 1**", "**Model 2**"))
+
+#### my code ####
+
+tbl_uvregression(
+	nlsy,
+	x = sex_cat,
+	include = c(nsibs, sleep_wkdy, sleep_wknd, income),
+	method = lm)
+
+tbl_uvregression(
+	nlsy,
+	y = nsibs,
+	include = c(glasses, race_eth, age_bir),
+	method = glm,
+	method.args = list(family = poisson()),
+	exponentiate = TRUE)
+
+logistic_model_practice <- glm(glasses ~ eyesight_cat + sex_cat,
+											data = nlsy, family = binomial(link= "log"))
