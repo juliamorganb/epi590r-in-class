@@ -23,6 +23,7 @@ tbl_uvregression(
 							eyesight_cat, income, age_bir),
 	method = lm)
 
+#logistic regression
 
 tbl_uvregression(
 	nlsy,
