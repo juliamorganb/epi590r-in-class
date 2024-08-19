@@ -48,3 +48,13 @@ tidy(logistic_model, conf.int = TRUE, exponentiate = TRUE) |>
 	geom_errorbar() +
 	facet_grid(cols = vars(variable), scales = "free", space = "free") +
 	scale_y_log10()
+
+
+#In the last set of exercises, you compared a log-binomial model to a
+#log-Poisson model with robust standard errors using {gtsummary}. Your job now is
+#to do the same using broom::tidy(). You’ll need some extra packages, though,
+#because if you look at the broom::tidy() documentation, it doesn’t say anything
+#about adding robust standard errors. The answer, then, is usually to start Googling.
+#I’ve done so for you and found this post (I highly recommend all of Andrew Heiss’s R
+#and statistics explanations!). Use this as a guide to create a dataframe with the
+#results from both models (you can use bind_rows() to combine them, as in the example).
