@@ -58,3 +58,43 @@ tidy(logistic_model, conf.int = TRUE, exponentiate = TRUE) |>
 #I’ve done so for you and found this post (I highly recommend all of Andrew Heiss’s R
 #and statistics explanations!). Use this as a guide to create a dataframe with the
 #results from both models (you can use bind_rows() to combine them, as in the example).
+
+#### Exercises ####
+
+# 3
+# Fit a log-binomial model and a Poisson model to the glasses data
+eyes_binomial_model <- glm(glasses ~ eyesight_cat + sex_cat,
+													 data = nlsy, family = binomial(link = "log")
+)
+eyes_poisson_model <- glm(glasses ~ eyesight_cat + sex_cat,
+													data = nlsy, family = poisson(link = "log")
+)
+
+# usually I don't like adding packages in the middle of a script,
+# but I'll do it here to be clear what they're used for
+library(sandwich)
+library(lmtest)
+
+# tidy the models
+# coeftest is used to get robust standard errors
+binomial_tidy <- tidy(eyes_binomial_model, conf.int = TRUE)
+poisson_tidy <- tidy(coeftest(eyes_poisson_model, vcov = vcovHC, type = "HC1"), conf.int = TRUE)
+
+# create a dataframe of the estimates and confidence intervals from the two models
+both_models <- bind_rows(
+	binomial = binomial_tidy,
+	poisson = poisson_tidy,
+	.id = "model"
+) |>
+	# coeftest doesn't allow you to exponentiate, so do it here
+	mutate(across(c(estimate, conf.low, conf.high), exp))
+
+# compare estimates and CIs directly
+both_models |>
+	# remove some columns to make it easier to read
+	select(-std.error, -statistic, -p.value) |>
+	# "spread" the data so that each model is a column
+	pivot_wider(
+		values_from = c(estimate, conf.low, conf.high),
+		names_from = model
+	)
