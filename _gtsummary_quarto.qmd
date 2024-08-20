@@ -23,6 +23,10 @@ nlsy <- read_csv(here::here("data", "raw", "nlsy.csv"),
          glasses_cat = factor(glasses, labels = c("No", "Yes"))) 
 ```
 
+Text about the data:
+
+akrgj;oireagja;dlja;
+
 # Customization of `tbl_summary()`
 
 ```{r}
@@ -48,3 +52,16 @@ tbl_summary(
   ),
   missing_text = "Missing")
 ```
+
+
+```{r}
+tbl_summary(
+  nlsy,
+  by = sex_cat,
+  include = c(sex_cat, race_eth_cat, region_cat,
+              eyesight_cat, glasses, age_bir))
+              
+```
+
+
+
