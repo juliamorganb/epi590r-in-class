@@ -82,3 +82,27 @@ There was `r mean(nlsy$sleep_wknd, na.rm = T)` average night weekend sleep
 There was `r median_wknd_sleep` median night weekend sleep
 
 There was `r median(nlsy$sleep_wknd, na.rm = T)` median night weekend sleep
+
+```{r}
+#| label: tbl-descr
+#| tbl-cap: "Descriptive statistics"
+table1 <- tbl_summary(
+  nlsy,
+  by = sex_cat,
+  include = c(sex_cat, race_eth_cat, region_cat,
+              eyesight_cat, glasses, age_bir)) |> 
+  add_overall(last = TRUE)
+table1
+
+```
+
+The IQR for age is `r inline_text(table1, variable = "age_bir", column = "stat_1")`. 
+
+```{r}
+table2 <- tbl_summary(
+  nlsy,
+  include = c(sleep_wknd))
+table2
+```
+
+The median hours of sleep per weekend is `r inline_text(table2, variable = "sleep_wknd", column = "stat_0")`. 
