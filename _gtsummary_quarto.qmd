@@ -103,6 +103,8 @@ table2 <- tbl_summary(
   nlsy,
   include = c(sleep_wknd))
 table2
+
+median_hours_sleep_weekend <- inline_text(table2, variable = "sleep_wknd", column = "stat_0")
 ```
 
-The median hours of sleep per weekend is `r inline_text(table2, variable = "sleep_wknd", column = "stat_0")`. 
+The median hours of sleep per weekend is `r median_hours_sleep_weekend`. 
